@@ -8,8 +8,6 @@ public class CommandView extends SubView {
 
     private static final String[] COLORS = {"blancas", "negras"};
 
-    private static final String MESSAGE = "Derrota!!! No puedes mover tus fichas!!!";
-
     public CommandView(){
         super();
     }
@@ -29,7 +27,7 @@ public class CommandView extends SubView {
             gameView.write(playController);
         } while (error != null); 
         if (playController.isBlocked()){
-            this.console.write(CommandView.MESSAGE);
+            this.console.write(MessageView.DEFEAT.getMessage());
         }
     }
 
