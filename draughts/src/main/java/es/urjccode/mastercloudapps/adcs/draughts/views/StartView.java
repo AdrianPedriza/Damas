@@ -1,11 +1,14 @@
 package es.urjccode.mastercloudapps.adcs.draughts.views;
 
 import es.urjccode.mastercloudapps.adcs.draughts.controllers.StartController;
+import es.urjccode.mastercloudapps.adcs.draughts.utils.Console;
 
-public class StartView extends SubView {
+public class StartView {
+
+    private Console console;
 
     public StartView(){
-        super();
+        this.console = new Console();
     }
 
     public void interact(StartController startController) {

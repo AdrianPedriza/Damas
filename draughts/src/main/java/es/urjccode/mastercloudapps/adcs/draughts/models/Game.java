@@ -42,7 +42,7 @@ public class Game {
 		if (error != null) {
 			return error;
 		}else{
-			if (eatPiece(origin, target)) {
+			if (isEatenMovement(origin, target)) {
 				Coordinate between = origin.betweenDiagonal(target);
 				this.board.remove(between);
 			}
@@ -52,7 +52,7 @@ public class Game {
 		}
 	}
 
-	private boolean eatPiece(Coordinate origin, Coordinate target) {
+	private boolean isEatenMovement(Coordinate origin, Coordinate target) {
 		return origin.diagonalDistance(target) == 2;
 	}
 

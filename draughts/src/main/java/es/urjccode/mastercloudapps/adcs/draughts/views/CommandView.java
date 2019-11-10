@@ -2,14 +2,16 @@ package es.urjccode.mastercloudapps.adcs.draughts.views;
 
 import es.urjccode.mastercloudapps.adcs.draughts.controllers.PlayController;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Error;
+import es.urjccode.mastercloudapps.adcs.draughts.utils.Console;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
 
-public class CommandView extends SubView {
+public class CommandView{
 
+    private Console console;
     private static final String[] COLORS = {"blancas", "negras"};
 
     public CommandView(){
-        super();
+        this.console = new Console();
     }
 
     public void interact(PlayController playController) {
@@ -20,6 +22,7 @@ public class CommandView extends SubView {
             String[] command = this.console.readString("Mueven las " + color + ": ").split("-");
             int origin = Integer.parseInt(command[0]);
             int target = Integer.parseInt(command[1]);
+            
             error = playController.move(new Coordinate(origin), new Coordinate(target));
             if (error != null){
                 console.writeln(new ErrorView(error).getMessage());

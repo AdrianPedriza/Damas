@@ -3,10 +3,16 @@ package es.urjccode.mastercloudapps.adcs.draughts.views;
 import es.urjccode.mastercloudapps.adcs.draughts.controllers.Controller;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Color;
 import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
+import es.urjccode.mastercloudapps.adcs.draughts.utils.Console;
 
-public class GameView extends SubView {
+public class GameView{
 
+    private Console console;
     private static final String[] COLORS = new String[]{"b", "n", " "};
+
+    public GameView() {
+        this.console = new Console();
+    }
 
 	public void write(Controller controller) {
         final int DIMENSION = controller.getDimension();
