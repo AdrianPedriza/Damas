@@ -25,8 +25,8 @@ public class CommandView extends SubView {
             error = playController.move(new Coordinate(origin/10-1, origin%10-1), new Coordinate(target/10-1, target%10-1));
             if (error != null){
                 console.writeln("Error!!!" + error.name());
-            gameView.write(playController);
             }
+            gameView.write(playController);
         } while (error != null); 
         if (playController.isBlocked()){
             this.console.write(CommandView.MESSAGE);
