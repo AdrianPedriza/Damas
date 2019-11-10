@@ -38,6 +38,25 @@ public class Game {
 
 	public Error move(Coordinate origin, Coordinate target) {
 		assert origin != null && target != null;
+		Error error = getErrorInMovement(origin, target);
+		if (error != null) {
+			return error;
+		}else{
+			if (eatPiece(origin, target)) {
+				Coordinate between = origin.betweenDiagonal(target);
+				this.board.remove(between);
+			}
+			this.board.move(origin, target);
+			this.turn.change();
+			return null;
+		}
+	}
+
+	private boolean eatPiece(Coordinate origin, Coordinate target) {
+		return origin.diagonalDistance(target) == 2;
+	}
+
+	private Error getErrorInMovement(Coordinate origin, Coordinate target) {
 		if (!origin.isValid() || !target.isValid()) {
 			return Error.OUT_COORDINATE;
 		}
@@ -66,10 +85,7 @@ public class Game {
 			if (this.board.getPiece(between) == null) {
 				return Error.EATING_EMPTY;
 			}
-			this.board.remove(between);
 		}
-		this.board.move(origin, target);
-		this.turn.change();
 		return null;
 	}
 
