@@ -22,4 +22,12 @@ public class ResumeController extends Controller {
         this.state.reset();
 	}
 
+	public void resume(boolean resetGame) {
+		if (resetGame){
+            reset();
+        } else {
+            next();
+        }
+	}
+
 }

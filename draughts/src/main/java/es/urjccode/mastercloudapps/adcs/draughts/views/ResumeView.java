@@ -13,11 +13,7 @@ public class ResumeView extends SubView {
     }
 
     public void interact(ResumeController resumeController) {
-        if (this.yesNoDialog.read(MessageView.REPEAT_GAME_QUESTION.getMessage())){
-            resumeController.reset();
-        } else {
-            resumeController.next();
-        }
-
+        boolean resetGame = this.yesNoDialog.read(MessageView.REPEAT_GAME_QUESTION.getMessage());
+        resumeController.resume(resetGame);
     }
 }

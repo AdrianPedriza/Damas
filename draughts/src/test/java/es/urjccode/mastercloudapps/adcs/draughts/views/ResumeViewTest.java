@@ -36,7 +36,7 @@ public class ResumeViewTest {
     public void testInteract(){
         when(yesNoDialog.read(anyString())).thenReturn(true);
         resumeView.interact(resumeController);
-        verify(resumeController).reset();
+        verify(resumeController).resume(true);
     }
 
 }
