@@ -17,10 +17,10 @@ public class CommandView extends SubView {
         Error error = null;
         GameView gameView = new GameView();
         do {
-            String command = this.console.readString("Mueven las " + color + ": ");
-            int origin = Integer.parseInt(command.substring(0, 2));
-            int target = Integer.parseInt(command.substring(3, 5));
-            error = playController.move(new Coordinate(origin/10-1, origin%10-1), new Coordinate(target/10-1, target%10-1));
+            String[] command = this.console.readString("Mueven las " + color + ": ").split("-");
+            int origin = Integer.parseInt(command[0]);
+            int target = Integer.parseInt(command[1]);
+            error = playController.move(new Coordinate(origin), new Coordinate(target));
             if (error != null){
                 console.writeln(new ErrorView(error).getMessage());
             }

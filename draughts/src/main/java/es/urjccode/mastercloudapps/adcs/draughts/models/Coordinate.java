@@ -11,6 +11,11 @@ public class Coordinate {
         this.row = row;
         this.column = column;
     }
+    
+    public Coordinate(int completeCoordinate) {
+        this.row = completeCoordinate/10-1;
+        this.column = completeCoordinate%10-1;
+    }
 
     public boolean isValid() {
         return Coordinate.LOWER_LIMIT <= row && row <= Coordinate.UPPER_LIMIT && Coordinate.LOWER_LIMIT <= column
