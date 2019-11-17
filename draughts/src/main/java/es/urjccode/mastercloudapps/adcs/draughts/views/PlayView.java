@@ -24,22 +24,26 @@ class PlayView extends SubView {
             String color = PlayView.COLORS[playController.getColor().ordinal()];
             String format = this.console.readString("Mueven las " + color + ": ");
             if (format.length() != PlayView.FORMAT.length()) {
-                this.console.write("Error!!! Formato incorrecto");
                 error = Error.BAD_FORMAT;
+                this.console.writeln("Error!!! " + error.name());
             } else {
                 origin = Coordinate.getInstance(format.substring(0, 2));
                 target = Coordinate.getInstance(format.substring(3, 5));
                 if (origin == null || target == null) {
                     error = Error.BAD_FORMAT;
-                } 
+                    this.console.writeln("Error!!! " + error.name());
+                }
             }
         } while (error != null);
         error = playController.isCorrect(origin, target);
         if (error == null){
             playController.move(origin, target);
+            new GameView().write(playController);
             if (playController.isBlocked()){
                 this.console.writeln(PlayView.MESSAGE);
             }
+        }else {
+            this.console.writeln("Error!!! " + error.name());
         }
     }
 
