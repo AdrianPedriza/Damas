@@ -59,6 +59,7 @@ public class GameBlockedTest {
             pieces.add(new Pawn(Color.WHITE));
         }
         when(board.getPieces(Color.WHITE)).thenReturn(pieces);
+        when(board.canMove(Color.WHITE)).thenReturn(true);
         assertTrue(game.isBlocked());
     }
 

@@ -1,7 +1,10 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 class Board implements PieceProvider {
 
@@ -103,5 +106,28 @@ class Board implements PieceProvider {
         }
         return string + row + "\n";
     }
+
+    boolean canMove(Color color) {
+        Map<Piece, Coordinate> pieces = new HashMap<>();
+        for (int i = 0; i < this.getDimension(); i++) {
+            for (int j = 0; j < this.getDimension(); j++) {
+                Piece piece = this.squares[i][j].getPiece();
+                if (piece != null && piece.getColor().equals(color)) {
+                    pieces.put(this.squares[i][j].getPiece(), new Coordinate(i, j));
+                }
+
+            }
+        }
+        for (Entry<Piece, Coordinate> piece: pieces.entrySet()) {
+            if (piece.getKey() instanceof Pawn && piece.getValue().possiblePawnMoves(piece.getKey(), this)) {
+                return true;
+            }else if (piece.getKey() instanceof Draught && piece.getValue().possibleDraughtMoves().size() > 0) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    
 
 }

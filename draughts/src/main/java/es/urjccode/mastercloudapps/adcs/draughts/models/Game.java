@@ -94,13 +94,12 @@ public class Game {
 	}
 
 	public boolean isBlocked() {
-		//return this.board.getPieces(this.turn.getColor()).isEmpty();
 		List<Piece> pieces = this.board.getPieces(this.turn.getColor());
 		if (pieces.isEmpty()) {
 			return true;
 		}
 
-		return false;
+		return this.board.canMove(this.turn.getColor());
 	}
 
 	public int getDimension() {
