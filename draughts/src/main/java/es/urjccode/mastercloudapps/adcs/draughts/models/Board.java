@@ -121,7 +121,7 @@ class Board implements PieceProvider {
         for (Entry<Piece, Coordinate> piece: pieces.entrySet()) {
             if (piece.getKey() instanceof Pawn && piece.getValue().possiblePawnMoves(piece.getKey(), this)) {
                 return true;
-            }else if (piece.getKey() instanceof Draught && piece.getValue().possibleDraughtMoves().size() > 0) {
+            }else if (piece.getKey() instanceof Draught && piece.getValue().possibleDraughtMoves(piece.getKey(), this)) {
                 return true;
             }
         }

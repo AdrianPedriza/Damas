@@ -147,14 +147,14 @@ public class Coordinate {
 
     public boolean possiblePawnMoves(Piece piece, Board board) {
         List<Coordinate> possibleMoves = this.getPossibleMoves(piece);
-        Error error = null;
+        Boolean anyMove = false;
         for (Coordinate target: possibleMoves) {
             if (target != null ){
-                error = piece.isCorrect(this, target, board);
+                anyMove = piece.isCorrect(this, target, board) == null;
             }
             
         }
-        return error == null;
+        return anyMove;
 	}
 
 	private List<Coordinate> getPossibleMoves(Piece piece) {
@@ -213,8 +213,16 @@ public class Coordinate {
         } while(rowLimit > 0 && columnLimit > 0);
     }
 
-    public List<Coordinate> possibleDraughtMoves() {
-        return null;
+    public boolean possibleDraughtMoves(Piece piece, Board board) {
+        List<Coordinate> possibleMoves = this.getPossibleMoves(piece);
+        Boolean anyMove = false;
+        for (Coordinate target: possibleMoves) {
+            if (target != null ){
+                anyMove = piece.isCorrect(this, target, board) == null;
+            }
+            
+        }
+        return anyMove;
 	}
 
 }
