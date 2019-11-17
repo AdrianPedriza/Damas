@@ -7,7 +7,6 @@ import es.urjccode.mastercloudapps.adcs.draughts.models.Coordinate;
 class PlayView extends SubView {
 
     private static final String[] COLORS = { "blancas", "negras" };
-    private static final String MESSAGE = "Derrota!!! No puedes mover tus fichas!!!";
     private static final String FORMAT = "xx.xx";
 
     PlayView() {
@@ -40,7 +39,7 @@ class PlayView extends SubView {
             playController.move(origin, target);
             //new GameView().write(playController);
             if (playController.isBlocked()){
-                this.console.writeln(PlayView.MESSAGE);
+                this.console.writeln(MessageView.DEFEAT.getMessage());
             }
         }else {
             this.console.writeln("Error!!! " + error.name());
