@@ -38,13 +38,8 @@ public class GameDraughtsTest {
     public void testGivenGameWhenWhitePawnAtLimitThenNewDraugts(){
         Coordinate origin = new Coordinate(1,0);
         Coordinate target = new Coordinate(0,1);
-        
-        when (turn.getColor()).thenReturn(Color.WHITE);
-        when(board.isEmpty(origin)).thenReturn(false);
-        when(board.getColor(origin)).thenReturn(Color.WHITE);
-        when(board.getPiece(origin)).thenReturn(pawn);
-        when(pawn.isCorrect(origin, target, board)).thenReturn(null);
-        when(board.remove(origin)).thenReturn(new Pawn(Color.WHITE));
+
+        setWhenConfPawn(origin, target, Color.WHITE);
         
         when(board.getPiece(target)).thenReturn(new Pawn(Color.WHITE));
         game.move(origin, target);
@@ -56,13 +51,7 @@ public class GameDraughtsTest {
     public void testGivenGameWhenWhitePawnAtLimitAndEatingThenNewDraugts(){
         Coordinate origin = new Coordinate(2,1);
         Coordinate target = new Coordinate(0,3);
-        when (turn.getColor()).thenReturn(Color.WHITE);
-        when(board.isEmpty(origin)).thenReturn(false);
-        when(board.getColor(origin)).thenReturn(Color.WHITE);
-        when(board.getPiece(origin)).thenReturn(pawn);
-        when(pawn.isCorrect(origin, target, board)).thenReturn(null);
-        when(board.remove(origin)).thenReturn(new Pawn(Color.WHITE));
-        when(board.getPiece(target)).thenReturn(new Pawn(Color.WHITE));
+        setWhenConfPawn(origin, target, Color.WHITE);
         game.move(origin, target);
         verify(board).remove(origin.betweenDiagonal(target));
         verify(board).remove(target);
@@ -73,13 +62,7 @@ public class GameDraughtsTest {
     public void testGivenGameWhenBlackPawnAtLimitThenNewDraugts(){
         Coordinate origin = new Coordinate(6,3);
         Coordinate target = new Coordinate(7,2);
-        when (turn.getColor()).thenReturn(Color.BLACK);
-        when(board.isEmpty(origin)).thenReturn(false);
-        when(board.getColor(origin)).thenReturn(Color.BLACK);
-        when(board.getPiece(origin)).thenReturn(pawn);
-        when(pawn.isCorrect(origin, target, board)).thenReturn(null);
-        when(board.remove(origin)).thenReturn(new Pawn(Color.BLACK));
-        when(board.getPiece(target)).thenReturn(new Pawn(Color.BLACK));
+        setWhenConfPawn(origin, target, Color.BLACK);
         game.move(origin, target);
         verify(board).remove(target);
         verify(board).put(any(Coordinate.class), any(Draught.class));
@@ -89,13 +72,7 @@ public class GameDraughtsTest {
     public void testGivenGameWhenBlackPawnAtLimitAndEatingThenNewDraugts(){
         Coordinate origin = new Coordinate(5,4);
         Coordinate target = new Coordinate(7,2);
-        when (turn.getColor()).thenReturn(Color.BLACK);
-        when(board.isEmpty(origin)).thenReturn(false);
-        when(board.getColor(origin)).thenReturn(Color.BLACK);
-        when(board.getPiece(origin)).thenReturn(pawn);
-        when(pawn.isCorrect(origin, target, board)).thenReturn(null);
-        when(board.remove(origin)).thenReturn(new Pawn(Color.BLACK));
-        when(board.getPiece(target)).thenReturn(new Pawn(Color.BLACK));
+        setWhenConfPawn(origin, target, Color.BLACK);
         game.move(origin, target);
         verify(board).remove(origin.betweenDiagonal(target));
         verify(board).remove(target);
@@ -107,16 +84,29 @@ public class GameDraughtsTest {
         Coordinate origin = new Coordinate(6,3);
         Coordinate target = new Coordinate(5,2);
 
-
-        when(turn.getColor()).thenReturn(Color.WHITE);
-        when(board.isEmpty(origin)).thenReturn(false);
-        when(board.getColor(origin)).thenReturn(Color.WHITE);
-        when(board.getPiece(origin)).thenReturn(draught);
-        when(draught.isCorrect(origin, target, board)).thenReturn(null);
-        when(board.remove(origin)).thenReturn(new Draught(Color.WHITE));
-        when(board.getPiece(target)).thenReturn(new Draught(Color.WHITE));
+        setWhenConfDraugth(origin, target, Color.WHITE);
 
         game.move(origin, target);
         verify(board).move(origin, target);
+    }
+
+    private void setWhenConfPawn(Coordinate origin, Coordinate target, Color color) {
+        when(turn.getColor()).thenReturn(color);
+        when(board.isEmpty(origin)).thenReturn(false);
+        when(board.getColor(origin)).thenReturn(color);
+        when(board.getPiece(origin)).thenReturn(pawn);
+        when(pawn.isCorrect(origin, target, board)).thenReturn(null);
+        when(board.remove(origin)).thenReturn(new Draught(color));
+        when(board.getPiece(target)).thenReturn(new Draught(color));
+    }
+
+    private void setWhenConfDraugth(Coordinate origin, Coordinate target, Color color) {
+        when(turn.getColor()).thenReturn(color);
+        when(board.isEmpty(origin)).thenReturn(false);
+        when(board.getColor(origin)).thenReturn(color);
+        when(board.getPiece(origin)).thenReturn(draught);
+        when(draught.isCorrect(origin, target, board)).thenReturn(null);
+        when(board.remove(origin)).thenReturn(new Draught(color));
+        when(board.getPiece(target)).thenReturn(new Draught(color));
     }
 }
