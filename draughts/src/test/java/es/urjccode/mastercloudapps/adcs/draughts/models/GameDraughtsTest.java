@@ -17,7 +17,7 @@ public class GameDraughtsTest {
     Turn turn;
 
     @Mock
-    Piece piece;
+    Pawn pawn;
     
     @Mock
     Board board;
@@ -38,8 +38,8 @@ public class GameDraughtsTest {
         when (turn.getColor()).thenReturn(Color.WHITE);
         when(board.isEmpty(origin)).thenReturn(false);
         when(board.getColor(origin)).thenReturn(Color.WHITE);
-        when(board.getPiece(origin)).thenReturn(piece);
-        when(piece.isCorrect(origin, target, board)).thenReturn(null);
+        when(board.getPiece(origin)).thenReturn(pawn);
+        when(pawn.isCorrect(origin, target, board)).thenReturn(null);
         when(board.remove(origin)).thenReturn(new Pawn(Color.WHITE));
         
         when(board.getPiece(target)).thenReturn(new Pawn(Color.WHITE));
@@ -55,8 +55,8 @@ public class GameDraughtsTest {
         when (turn.getColor()).thenReturn(Color.WHITE);
         when(board.isEmpty(origin)).thenReturn(false);
         when(board.getColor(origin)).thenReturn(Color.WHITE);
-        when(board.getPiece(origin)).thenReturn(piece);
-        when(piece.isCorrect(origin, target, board)).thenReturn(null);
+        when(board.getPiece(origin)).thenReturn(pawn);
+        when(pawn.isCorrect(origin, target, board)).thenReturn(null);
         when(board.remove(origin)).thenReturn(new Pawn(Color.WHITE));
         when(board.getPiece(target)).thenReturn(new Pawn(Color.WHITE));
         game.move(origin, target);
@@ -72,8 +72,8 @@ public class GameDraughtsTest {
         when (turn.getColor()).thenReturn(Color.BLACK);
         when(board.isEmpty(origin)).thenReturn(false);
         when(board.getColor(origin)).thenReturn(Color.BLACK);
-        when(board.getPiece(origin)).thenReturn(piece);
-        when(piece.isCorrect(origin, target, board)).thenReturn(null);
+        when(board.getPiece(origin)).thenReturn(pawn);
+        when(pawn.isCorrect(origin, target, board)).thenReturn(null);
         when(board.remove(origin)).thenReturn(new Pawn(Color.BLACK));
         when(board.getPiece(target)).thenReturn(new Pawn(Color.BLACK));
         game.move(origin, target);
@@ -88,8 +88,8 @@ public class GameDraughtsTest {
         when (turn.getColor()).thenReturn(Color.BLACK);
         when(board.isEmpty(origin)).thenReturn(false);
         when(board.getColor(origin)).thenReturn(Color.BLACK);
-        when(board.getPiece(origin)).thenReturn(piece);
-        when(piece.isCorrect(origin, target, board)).thenReturn(null);
+        when(board.getPiece(origin)).thenReturn(pawn);
+        when(pawn.isCorrect(origin, target, board)).thenReturn(null);
         when(board.remove(origin)).thenReturn(new Pawn(Color.BLACK));
         when(board.getPiece(target)).thenReturn(new Pawn(Color.BLACK));
         game.move(origin, target);

@@ -38,6 +38,19 @@ public class Game {
 
 	public void move(Coordinate origin, Coordinate target) {
 		assert this.isCorrect(origin, target) == null;
+		if (this.board.getPiece(origin) instanceof Pawn) {
+			this.movePawn(origin, target);
+		} else {
+			this.moveDraught(origin, target);
+		}
+		
+	}
+
+	private void moveDraught(Coordinate origin, Coordinate target) {
+		this.board.remove(origin.betweenDiagonal(target));
+	}
+
+	private void movePawn(Coordinate origin, Coordinate target) {
 		if (origin.diagonalDistance(target) == 2) {
 			this.board.remove(origin.betweenDiagonal(target));
 		}
@@ -49,7 +62,7 @@ public class Game {
 		this.turn.change();
 	}
 
-	public Error isCorrect(Coordinate origin, Coordinate target){
+	public Error isCorrect(Coordinate origin, Coordinate target) {
 		assert origin != null;
 		assert target != null;
 		if (board.isEmpty(origin)) {
