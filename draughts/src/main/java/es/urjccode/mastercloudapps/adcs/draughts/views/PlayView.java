@@ -24,13 +24,13 @@ class PlayView extends SubView {
             String format = this.console.readString("Mueven las " + color + ": ");
             if (format.length() != PlayView.FORMAT.length()) {
                 error = Error.BAD_FORMAT;
-                this.console.writeln("Error!!! " + error.name());
+                this.console.writeln(new ErrorView(error).getMessage());
             } else {
                 origin = Coordinate.getInstance(format.substring(0, 2));
                 target = Coordinate.getInstance(format.substring(3, 5));
                 if (origin == null || target == null) {
                     error = Error.BAD_FORMAT;
-                    this.console.writeln("Error!!! " + error.name());
+                    this.console.writeln(new ErrorView(error).getMessage());
                 }
             }
         } while (error != null);
@@ -42,7 +42,7 @@ class PlayView extends SubView {
                 this.console.writeln(MessageView.DEFEAT.getMessage());
             }
         }else {
-            this.console.writeln("Error!!! " + error.name());
+            this.console.writeln(new ErrorView(error).getMessage());
         }
     }
 
