@@ -47,7 +47,10 @@ public class Game {
 	}
 
 	private void moveDraught(Coordinate origin, Coordinate target) {
-		this.board.remove(origin.betweenDiagonal(target));
+		if (origin.diagonalDistance(target) == 2) {
+			this.board.remove(origin.betweenDiagonal(target));
+		}
+		this.board.move(origin, target);
 	}
 
 	private void movePawn(Coordinate origin, Coordinate target) {

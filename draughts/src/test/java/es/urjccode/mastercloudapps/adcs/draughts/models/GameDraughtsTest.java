@@ -1,6 +1,7 @@
 package es.urjccode.mastercloudapps.adcs.draughts.models;
 
 import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -18,6 +19,9 @@ public class GameDraughtsTest {
 
     @Mock
     Pawn pawn;
+
+    @Mock
+    Draught draught;
     
     @Mock
     Board board;
@@ -96,5 +100,23 @@ public class GameDraughtsTest {
         verify(board).remove(origin.betweenDiagonal(target));
         verify(board).remove(target);
         verify(board).put(any(Coordinate.class), any(Draught.class));
+    }
+
+    @Test
+    public void testGivenGameWhenWhiteDraughtWantToMoveThenMoveOneSquareReverse() {
+        Coordinate origin = new Coordinate(6,3);
+        Coordinate target = new Coordinate(5,2);
+
+
+        when(turn.getColor()).thenReturn(Color.WHITE);
+        when(board.isEmpty(origin)).thenReturn(false);
+        when(board.getColor(origin)).thenReturn(Color.WHITE);
+        when(board.getPiece(origin)).thenReturn(draught);
+        when(draught.isCorrect(origin, target, board)).thenReturn(null);
+        when(board.remove(origin)).thenReturn(new Draught(Color.WHITE));
+        when(board.getPiece(target)).thenReturn(new Draught(Color.WHITE));
+
+        game.move(origin, target);
+        verify(board).move(origin, target);
     }
 }
