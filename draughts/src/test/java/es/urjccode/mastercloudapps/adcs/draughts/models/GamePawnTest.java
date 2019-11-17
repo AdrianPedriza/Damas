@@ -4,11 +4,11 @@ import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertEquals;
 import org.junit.Test;
 
-public class GameTest {
+public class GamePawnTest {
 
     private Game game;
 
-    public GameTest() {
+    public GamePawnTest() {
         game = new Game();
     }
 
