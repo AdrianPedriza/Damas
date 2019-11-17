@@ -58,7 +58,14 @@ class Board implements PieceProvider {
             }
         }
 		return pieces;
-	}
+    }
+    
+    void remove(List<Coordinate> coordinates) {
+        assert coordinates.size() != 0;
+        for (Coordinate c: coordinates) {
+            this.getSquare(c).remove();
+        } 
+    }
     
     int getDimension() {
 		return Board.DIMENSION;

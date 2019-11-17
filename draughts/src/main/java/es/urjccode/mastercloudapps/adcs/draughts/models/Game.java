@@ -47,15 +47,20 @@ public class Game {
 	}
 
 	private void moveDraught(Coordinate origin, Coordinate target) {
-		if (origin.diagonalDistance(target) == 2) {
-			this.board.remove(origin.betweenDiagonal(target));
+		if (origin.diagonalDistance(target) > 1) {
+			this.board.remove(origin.betweenDiagonalDraught(target));
 		}
 		this.board.move(origin, target);
+		if (this.board.getPiece(target).isLimit(target)){
+			this.board.remove(target);
+			this.board.put(target, new Draught(Color.WHITE));
+		}
+		this.turn.change();
 	}
 
 	private void movePawn(Coordinate origin, Coordinate target) {
 		if (origin.diagonalDistance(target) == 2) {
-			this.board.remove(origin.betweenDiagonal(target));
+			this.board.remove(origin.betweenDiagonalPawn(target));
 		}
 		this.board.move(origin, target);
 		if (this.board.getPiece(target).isLimit(target)){

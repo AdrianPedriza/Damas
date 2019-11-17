@@ -53,7 +53,7 @@ public class GameDraughtsTest {
         Coordinate target = new Coordinate(0,3);
         setWhenConfPawn(origin, target, Color.WHITE);
         game.move(origin, target);
-        verify(board).remove(origin.betweenDiagonal(target));
+        verify(board).remove(origin.betweenDiagonalPawn(target));
         verify(board).remove(target);
         verify(board).put(any(Coordinate.class), any(Draught.class));
     }
@@ -74,7 +74,7 @@ public class GameDraughtsTest {
         Coordinate target = new Coordinate(7,2);
         setWhenConfPawn(origin, target, Color.BLACK);
         game.move(origin, target);
-        verify(board).remove(origin.betweenDiagonal(target));
+        verify(board).remove(origin.betweenDiagonalPawn(target));
         verify(board).remove(target);
         verify(board).put(any(Coordinate.class), any(Draught.class));
     }
@@ -108,5 +108,86 @@ public class GameDraughtsTest {
         when(draught.isCorrect(origin, target, board)).thenReturn(null);
         when(board.remove(origin)).thenReturn(new Draught(color));
         when(board.getPiece(target)).thenReturn(new Draught(color));
+    }
+
+    @Test
+    public void testGivenGameWhenWhiteDraughtWantToMoveThenMoveMoreThanOneSquareReverse() {
+        Coordinate origin = new Coordinate(4,1);
+        Coordinate target = new Coordinate(6,3);
+
+        setWhenConfDraugth(origin, target, Color.WHITE);
+
+        game.move(origin, target);
+        verify(board).move(origin, target);
+    }
+
+    @Test
+    public void testGivenGameWhenBlackDraughtWantToMoveThenMoveMoreThanOneSquare() {
+        Coordinate origin = new Coordinate(6,3);
+        Coordinate target = new Coordinate(4,1);
+
+        setWhenConfDraugth(origin, target, Color.WHITE);
+
+        game.move(origin, target);
+        verify(board).move(origin, target);
+    }
+
+    @Test
+    public void testGivenGameWhenBlackDraughtWantToMoveThenMoveMoreThanOneSquareReverse() {
+        Coordinate origin = new Coordinate(4,1);
+        Coordinate target = new Coordinate(6,3);
+
+        setWhenConfDraugth(origin, target, Color.BLACK);
+
+        game.move(origin, target);
+        verify(board).move(origin, target);
+    }
+
+    @Test
+    public void testGivenGameWhenWhiteDraughtWantToEatThenEatOneSquare() {
+        Coordinate origin = new Coordinate(6,3);
+        Coordinate target = new Coordinate(4,1);
+
+        setWhenConfDraugth(origin, target, Color.WHITE);
+
+        game.move(origin, target);
+        verify(board).remove(origin.betweenDiagonalDraught(target));
+        verify(board).move(origin, target);
+    }
+
+    @Test
+    public void testGivenGameWhenBlackDraughtWantToEatThenEatOneSquare() {
+        Coordinate origin = new Coordinate(4,1);
+        Coordinate target = new Coordinate(6,3);
+
+        setWhenConfDraugth(origin, target, Color.BLACK);
+
+        game.move(origin, target);
+        verify(board).remove(origin.betweenDiagonalDraught(target));
+        verify(board).move(origin, target);
+    }
+
+    @Test
+    public void testGivenGameWhenWhiteDraughtWantToEatThenEatMoreThanOneSquare() {
+        Coordinate origin = new Coordinate(6,3);
+        Coordinate target = new Coordinate(3,0);
+
+        setWhenConfDraugth(origin, target, Color.WHITE);
+
+        game.move(origin, target);
+        verify(board).remove(origin.betweenDiagonalDraught(target));
+        verify(board).move(origin, target);
+    }
+
+    @Test
+    public void testGivenGameWhenBlackDraughtWantToEatThenEatMoreThanOneSquare() {
+        Coordinate origin = new Coordinate(4,1);
+        Coordinate target = new Coordinate(7,4);
+
+        setWhenConfDraugth(origin, target, Color.BLACK);
+
+        game.move(origin, target);
+        verify(board).remove(origin.betweenDiagonalDraught(target));
+        verify(board).move(origin, target);
     }
 }
