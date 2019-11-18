@@ -22,4 +22,18 @@ public abstract class Piece {
 		return this.color;
 	}
 
+	public boolean isPawn() {
+		if (this instanceof Pawn) {
+			return true;
+		}
+		return false;
+	}
+
+	public boolean isDraugth() {
+		if (this instanceof Draught) {
+			return true;
+		}
+		return false;
+	}
+
 }

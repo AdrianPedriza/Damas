@@ -108,6 +108,30 @@ class Board implements PieceProvider {
     }
 
     boolean canMove(Color color) {
+        Map<Piece, Coordinate> piecesCoordinates = getAllPiecesCoordinatesInBoard(color);
+        for (Entry<Piece, Coordinate> piece: piecesCoordinates.entrySet()) {
+            if (hasMovements(piece)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private boolean hasMovements(Entry<Piece, Coordinate> piece) {
+        if (piece.getKey().isPawn()){
+            if (piece.getValue().possiblePawnMoves(piece.getKey(), this)) {
+                return true;
+            }
+
+        }else if (piece.getKey().isDraugth()){
+            if (piece.getValue().possibleDraughtMoves(piece.getKey(), this)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Map<Piece, Coordinate> getAllPiecesCoordinatesInBoard(Color color) {
         Map<Piece, Coordinate> pieces = new HashMap<>();
         for (int i = 0; i < this.getDimension(); i++) {
             for (int j = 0; j < this.getDimension(); j++) {
@@ -118,14 +142,7 @@ class Board implements PieceProvider {
 
             }
         }
-        for (Entry<Piece, Coordinate> piece: pieces.entrySet()) {
-            if (piece.getKey() instanceof Pawn && piece.getValue().possiblePawnMoves(piece.getKey(), this)) {
-                return true;
-            }else if (piece.getKey() instanceof Draught && piece.getValue().possibleDraughtMoves(piece.getKey(), this)) {
-                return true;
-            }
-        }
-        return false;
+        return pieces;
     }
 
     
